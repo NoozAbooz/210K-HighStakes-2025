@@ -30,7 +30,7 @@ inline pros::Distance dist(21);
 inline pros::Imu inertial1(2);
 inline pros::Rotation wallStakeRotationSensor(11);
 
-inline pros::Distance backwardDist(18); // 4.8in back from center
+inline pros::Distance backwardDist(18); // 3.9in back from center
 inline pros::Distance leftDist(20); // 6in left of center
 
 inline pros::Rotation verticalEncoder(-13);
