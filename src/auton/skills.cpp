@@ -133,6 +133,12 @@ pros::Task([] {
 // intake.move_voltage(0);
 // pros::delay(100);
 // chassis.turnToHeading(270, 500);
+
+// pos reset - CLAMP MUST BE DOWN HERE!!! / do not run async / clamp should face the mogo and bot is parallel to field
+float absX = -((backwardDist.get_distance() / 25.4 + 3.9) - 72);
+float absY = leftDist.get_distance() / 25.4 - 0;
+chassis.setPose(absX, absY, chassis.getPose().theta);
+
 // chassis.moveToPoint(30 , 9, 1100, {.forwards = false, .maxSpeed = 60});
 // pros::delay(800);
 // clampPiston.set_value(true);
