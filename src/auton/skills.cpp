@@ -129,7 +129,7 @@ pros::Task([] {
 });
 
 
-// chassis.moveToPoint(0, 10, 1500);
+// chassis.moveToPoint(0, 10, 1500); // on way to second mogo intake facing mogo
 // intake.move_voltage(0);
 // pros::delay(100);
 // chassis.turnToHeading(270, 500);
