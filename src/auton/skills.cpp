@@ -120,14 +120,17 @@ pros::Task([]{
        pros::delay(1300);
        intake.move_voltage(0);
 });
-chassis.moveToPoint(-100, 110, 1000, {.forwards = false, .maxSpeed = 65});
+chassis.moveToPoint(-5, 115, 1000, {.forwards = false, .maxSpeed = 65});
 pros::Task([]{
        pros::delay(600);
        clampPiston.set_value(true);
        pros::delay(200);
        intake.move_voltage(12000);
 });
-
+chassis.moveToPoint(-49, 115, 1000);
+chassis.moveToPoint(-54, 105, 1000);
+chassis.moveToPoint(-46, 100, 1000);
+chassis.moveToPoint(-59, 120, 1000, {.forwards = false});
  }
 
 void skillsCS() { /* WITH COLOUR SORT */
