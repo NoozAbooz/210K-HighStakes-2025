@@ -4,15 +4,16 @@
 #include <vector>
 #include <random>
 #include <cmath>
+#include <main.h>
 
 #define NUM_PARTICLES 100
 
-pros::Distance sensor1(1);
-pros::Distance sensor2(2);
-pros::Distance sensor3(3);
-pros::Distance sensor4(4);
-pros::IMU imu1(5);
-pros::IMU imu2(6);
+inline pros::Distance sensor1(1);
+inline pros::Distance sensor2(2);
+inline pros::Distance sensor3(3);
+inline pros::Distance sensor4(4);
+inline pros::IMU imu1(5);
+inline pros::IMU imu2(6);
 
 struct Particle {
     double x, y, theta, weight;
