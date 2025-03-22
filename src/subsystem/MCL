@@ -50,35 +50,31 @@ double expected_distance(double x, double y, double theta, int sensor_id) {
 }
 
 bool is_sensor_facing_wall(double theta, int sensor_id) {
-    // Define angles at which each sensor is expected to face the walls
-    if (sensor_id == 1 && (theta > 315 || theta < 45)) return true;  // Forward-facing
-    if (sensor_id == 2 && (theta > 45 && theta < 135)) return true;  // Right-facing
-    if (sensor_id == 3 && (theta > 135 && theta < 225)) return true; // Backward-facing
-    if (sensor_id == 4 && (theta > 225 && theta < 315)) return true; // Left-facing
+    if (sensor_id == 1 && (theta > 315 || theta < 45)) return true;
+    if (sensor_id == 2 && (theta > 45 && theta < 135)) return true;
+    if (sensor_id == 3 && (theta > 135 && theta < 225)) return true;
+    if (sensor_id == 4 && (theta > 225 && theta < 315)) return true;
     return false;
 }
 
 void update_weights() {
     for (auto &p : particles) {
-        double error_sum = 0;
-        int valid_sensors = 0;
+        std::vector<double> errors;
         
-        if (is_sensor_facing_wall(p.theta, 1)) {
-            error_sum += std::abs(sensor1.get() - expected_distance(p.x, p.y, p.theta, 1));
-            valid_sensors++;
-        }
-        if (is_sensor_facing_wall(p.theta, 2)) {
-            error_sum += std::abs(sensor2.get() - expected_distance(p.x, p.y, p.theta, 2));
-            valid_sensors++;
-        }
-        if (is_sensor_facing_wall(p.theta, 3)) {
-            error_sum += std::abs(sensor3.get() - expected_distance(p.x, p.y, p.theta, 3));
-            valid_sensors++;
-        }
-        if (is_sensor_facing_wall(p.theta, 4)) {
-            error_sum += std::abs(sensor4.get() - expected_distance(p.x, p.y, p.theta, 4));
-            valid_sensors++;
-        }
+        if (is_sensor_facing_wall(p.theta, 1))
+            errors.push_back(std::abs(sensor1.get() - expected_distance(p.x, p.y, p.theta, 1)));
+        if (is_sensor_facing_wall(p.theta, 2))
+            errors.push_back(std::abs(sensor2.get() - expected_distance(p.x, p.y, p.theta, 2)));
+        if (is_sensor_facing_wall(p.theta, 3))
+            errors.push_back(std::abs(sensor3.get() - expected_distance(p.x, p.y, p.theta, 3)));
+        if (is_sensor_facing_wall(p.theta, 4))
+            errors.push_back(std::abs(sensor4.get() - expected_distance(p.x, p.y, p.theta, 4)));
+        
+        std::sort(errors.begin(), errors.end());
+        double error_sum = 0;
+        int valid_sensors = std::min(2, (int)errors.size());
+        for (int i = 0; i < valid_sensors; i++)
+            error_sum += errors[i];
         
         p.weight = valid_sensors > 0 ? 1.0 / (error_sum + 1e-6) : 0;
     }
