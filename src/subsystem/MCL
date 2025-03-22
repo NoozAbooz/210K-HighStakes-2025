@@ -82,10 +82,18 @@ void update_weights() {
 
 void resample() {
     std::vector<Particle> new_particles;
-    std::discrete_distribution<int> dist(particles.begin(), particles.end(), [](const Particle &p) { return p.weight; });
+    std::vector<double> weights;
+    
+    for (const auto &p : particles) {
+        weights.push_back(p.weight);
+    }
+    
+    std::discrete_distribution<int> dist(weights.begin(), weights.end());
+    
     for (int i = 0; i < NUM_PARTICLES; i++) {
         new_particles.push_back(particles[dist(gen)]);
     }
+    
     particles = new_particles;
 }
 
@@ -97,6 +105,12 @@ Particle get_estimate() {
         sum_theta += p.theta * p.weight;
     }
     return {sum_x, sum_y, sum_theta, 1.0};
+}
+
+void move_to_estimated_position() {
+    Particle estimate = get_estimate();
+//     chassis.moveToPoint(estimate.x, estimate.y, );
+//     chassis.turnToHeading(estimate.theta);
 }
 
 void opcontrol() {
@@ -112,6 +126,8 @@ void opcontrol() {
         Particle estimate = get_estimate();
         pros::lcd::print(0, "X: %.2f Y: %.2f Theta: %.2f", estimate.x, estimate.y, estimate.theta);
 
+        move_to_estimated_position();
+        
         pros::delay(100);
     }
 }
