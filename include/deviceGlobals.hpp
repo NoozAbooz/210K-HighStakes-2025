@@ -20,9 +20,9 @@ inline pros::Motor wallStake(15);
 
 // Pneumatics
 inline pros::adi::Pneumatics clampPiston('A', false);
-inline pros::adi::Pneumatics leftDoinkerPiston('B', false);
+inline pros::adi::Pneumatics descorePiston('B', false);
 inline pros::adi::Pneumatics rightDoinkerPiston('C', false);
-inline pros::adi::Pneumatics intakeLiftPiston('D', false);
+inline pros::adi::Pneumatics leftDoinkerPiston('D', false);
 
 /* Declare sensors */
 inline pros::Optical optical(6);
