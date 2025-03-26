@@ -85,8 +85,9 @@ pros::delay(1100);
 
 chassis.moveToPoint(25, 36, 900);
 pros::delay(200);
-chassis.moveToPoint(34, 40, 800);
-chassis.moveToPoint(52, 84, 2200);
+chassis.moveToPoint(34, 42, 800);
+chassis.moveToPoint(52, 81, 2000);
+pros::delay(200);
 pros::Task([]{
        pros::delay(650);
        liftControl(wallstakeStates[1]);
@@ -128,10 +129,9 @@ pros::Task([]{
        pros::delay(1400);
        clampPiston.set_value(true);
        pros::delay(200);
-       intake.move_voltage(-12000);
-       descorePiston.set_value(true);
-       pros::delay(1000);
-       descorePiston.set_value(false);
+       leftDoinkerPiston.set_value(true);
+       pros::delay(200);
+       leftDoinkerPiston.set_value(false);
        pros::delay(200);
        intake.move_voltage(12000);
 });
