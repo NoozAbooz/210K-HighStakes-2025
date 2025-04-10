@@ -42,11 +42,11 @@ bool descoreToggle = false;
 void refreshDoinker() {
 	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_Y)) {
     	doinkerToggle = !doinkerToggle;
-		if (alliance == "blue") {
+		// if (alliance == "blue") {
 			rightDoinkerPiston.set_value(doinkerToggle);
-		} else {
-			leftDoinkerPiston.set_value(doinkerToggle);
-		}
+		// } else {
+		// 	leftDoinkerPiston.set_value(doinkerToggle);
+		// }
     }
 	if (controller.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X)) {
     	descoreToggle = !descoreToggle;
