@@ -104,4 +104,13 @@ namespace ks
   	inline float to_milivolt(float input){
       return(input * (12000.0/127.0));
   	}
+
+	inline double largest_abs(double a, double b) {
+		if (std::abs(a) > std::abs(b)) {
+			return a;
+		} else if (std::abs(b) > std::abs(a)) {
+			return b;
+		}
+		return 0.0; // or return a or b, depending on your needs
+	}
 }

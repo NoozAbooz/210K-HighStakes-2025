@@ -16,16 +16,19 @@ double ks::driveCurve(double input, double curve) {
 }
 
 void ks::arcadeDrive(int linCurve, int rotCurve, double turnScale) {
-    int power = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
-    int turn = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X) * turnScale;
+    double power = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
+    double rawTurn = ks::largest_abs(controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X), controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X));
 
-    if (linCurve != 0 && rotCurve != 0) {
+    if (linCurve != 0) {
         // poll joystick input and convert to mv, then run through drivecurve function
         power = ks::driveCurve(controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), linCurve);
-        turn = ks::driveCurve(controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X), rotCurve) * turnScale;
+    }
+    if (rotCurve != 0) {
+        // poll joystick input and convert to mv, then run through drivecurve function
+        rawTurn = ks::driveCurve(controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X), rotCurve);
     }
 
     // move motors based on direction (eg move left more when turn is positive)
-    leftDrive.move_voltage((power + turn) * (12000.0 / 127));
-    rightDrive.move_voltage((power - turn) * (12000.0 / 127));
+    leftDrive.move_voltage((power + rawTurn * turnScale) * (12000.0 / 127));
+    rightDrive.move_voltage((power - rawTurn * turnScale) * (12000.0 / 127));
 }
