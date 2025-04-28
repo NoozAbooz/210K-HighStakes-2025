@@ -29,9 +29,8 @@ void ring_rush() {
 
         //move to 2 ring stack
         chassis.moveToPoint(-23.34, 37.551, 2000, {.maxSpeed = 55});
+        pros::delay(2100);
         colourSortToggle = true;
-        pros::delay(1810);
-        // antiJamToggle = true;
         chassis.turnToHeading(200, 500);
         // chassis.moveToPoint(-14, 25, 1000, {.forwards = false});
 
@@ -85,9 +84,8 @@ void ring_rush() {
 
         //move to 2 ring stack
         chassis.moveToPoint(23.34, 37.551, 2000, {.maxSpeed = 65});
+        pros::delay(2100);
         colourSortToggle = true;
-        pros::delay(1810);
-        // antiJamToggle = true;
         chassis.turnToHeading(160, 500);
 
         // travel to corner

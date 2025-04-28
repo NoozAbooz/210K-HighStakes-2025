@@ -41,7 +41,7 @@ void driveForward() {
 
 rd::Selector gui_selector({
     // {"Q SAWP 2 Mogo", SAWP_4},
-    {"Mecha SAWP", sawp, "", 0},
+    //{"Mecha SAWP", sawp, "", 0},
     {"Half SAWP", half_sawp, "", 0},
     // {"PID SAWP", pid_sawp, "", 0},
     {"Ring Rush", ring_rush, "", 0},

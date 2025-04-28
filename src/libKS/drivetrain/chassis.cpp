@@ -17,7 +17,7 @@ double ks::driveCurve(double input, double curve) {
 
 void ks::arcadeDrive(int linCurve, int rotCurve, double turnScale) {
     double power = controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
-    double rawTurn = ks::largest_abs(controller.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_X), controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X));
+    double rawTurn = controller.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
 
     if (linCurve != 0) {
         // poll joystick input and convert to mv, then run through drivecurve function
