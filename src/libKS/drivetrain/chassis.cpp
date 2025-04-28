@@ -10,6 +10,14 @@ void ks::moveRaw(int voltage, int time) {
 	rightDrive.move_voltage(0);
 }
 
+void ks::moveLinear(float length, int timeout, lemlib::MoveToPointParams params) {
+    if (chassis.isInMotion()) chassis.waitUntilDone();
+    params.forwards = length > 0;
+    lemlib::Pose pose = chassis.getPose();
+    chassis.moveToPoint(pose.x + length * sin(lemlib::degToRad(pose.theta)),
+                           pose.y + length * cos(lemlib::degToRad(pose.theta)), timeout, params);
+}
+
 // opcontrol
 double ks::driveCurve(double input, double curve) {
     return (std::pow(2.718, -(curve / 10)) + std::pow(2.718, (std::fabs(input) - 127) / 10) * (1 - std::pow(2.718, -(curve / 10)))) * input;
