@@ -4,7 +4,6 @@
 #include "lemlib/api.hpp"
 #include "gif-pros/gifclass.hpp"
 #include "robodash/api.h"
-#include "catLib/api.hpp"
 #include "liblvgl/lvgl.h"
 
 extern rd::Console console;

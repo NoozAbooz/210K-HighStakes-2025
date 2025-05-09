@@ -58,7 +58,7 @@ inline lemlib::ControllerSettings lateralController(6, // proportional gain (kP)
                                               100, // small error range timeout, in milliseconds
                                               3, // large error range, in inches
                                               500, // large error range timeout, in milliseconds
-                                              40 // maximum acceleration (slew)
+                                              20 // maximum acceleration (slew)
 );
 // angular motion controller
 inline lemlib::ControllerSettings angularController(2.5, // proportional gain (kP)
@@ -81,48 +81,3 @@ inline lemlib::OdomSensors sensors(&vertical_tracking_wheel, // vertical trackin
 );
 // create the chassis
 inline lemlib::Chassis chassis(drivetrain, lateralController, angularController, sensors);
-
-inline catlib::Drivetrain dt(
-    &leftDrive,
-    &rightDrive,
-    catlib::omniWheel::OMNI_325,
-    450
-);
-
-inline catlib::PIDConstants lateral_pid(
-    6.5,
-    0,
-    30
-);
-
-inline catlib::PIDConstants angular_pid(
-    2.5,
-    0,
-    25
-);
-
-inline catlib::TrackingWheel vertical_tracker(
-    &verticalEncoder,
-    2.75,
-    0.876
-);
-
-inline catlib::TrackingWheel horizontal_tracker(
-    &horizontalEncoder,
-    2.75,
-    -3.2455
-);
-
-inline catlib::OdomSensors bensors(
-    &inertial1,
-    &vertical_tracker,
-    &horizontal_tracker
-);
-
-inline catlib::Chassis cat (
-    &dt,
-    &lateral_pid,
-    &angular_pid,
-    &bensors,
-    catlib::DriveType::SPLIT_ARCADE
-);
